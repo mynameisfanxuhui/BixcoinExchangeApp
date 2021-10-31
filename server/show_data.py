@@ -27,14 +27,14 @@ def extractInfo(dataList, bIsBuy):
     if not bIsBuy:
         bReverse = True
     dataList.sort(key=lambda x: x.compare(bIsBuy), reverse=bReverse)
-    resDict = {}
+    resList = []
     for iPos, oCoin in enumerate(dataList):
-        iRecommend = 0
+        sRecommend = "No"
         # recommand first element
         if iPos == 0:
-            iRecommend = 1
+            sRecommend = "Yes"
         if bIsBuy:
-            resDict[oCoin.getName()] = {"buyPrice": oCoin.getBuyPrice(), "recommend": iRecommend}
+            resList.append({"source": oCoin.getName(), "buyPrice": oCoin.getBuyPrice(), "recommend": sRecommend})
         else:
-            resDict[oCoin.getName()] = {"sellPrice": oCoin.getSellPrice(), "recommend": iRecommend}
-    return resDict
+            resList.append({"source": oCoin.getName(), "sellPrice": oCoin.getSellPrice(), "recommend": sRecommend})
+    return resList
